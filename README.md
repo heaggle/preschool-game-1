@@ -1,4 +1,4 @@
-# Aphakids v1
+# AlphaKids V.1
 
 A small, playful **PWA** (no APK) that helps a 4–6 year old learn in English:
 
@@ -51,7 +51,7 @@ After the first visit, the service worker caches the app shell, fonts and icons.
 
 ### Deploying under a sub-path
 
-The default configuration targets the root of a domain. For a GitHub Pages project site (for example `https://name.github.io/aphakids/`), add `base: '/aphakids/'` to `vite.config.ts`. The manifest uses relative `start_url` and `scope` values, so installation keeps working.
+The default configuration targets the root of a domain. For a GitHub Pages project site (for example `https://name.github.io/alphakids/`), add `base: '/alphakids/'` to `vite.config.ts`. The manifest uses relative `start_url` and `scope` values, so installation keeps working.
 
 ## Structure
 

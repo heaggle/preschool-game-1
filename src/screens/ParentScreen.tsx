@@ -32,7 +32,7 @@ function ParentZone({ onBack }: { onBack: () => void }) {
   };
 
   const testVoice = () => {
-    speak("Hello! I am Aphakids. Let's learn together!");
+    speak("Hello! I am AlphaKids. Let's learn together!");
   };
 
   const install = async () => {
@@ -145,14 +145,14 @@ function ParentZone({ onBack }: { onBack: () => void }) {
       <section className="section-card">
         <h2 className="section-title">Install app</h2>
         {standalone || installedNow ? (
-          <p className="info-text success">✅ Aphakids is installed on this device.</p>
+          <p className="info-text success">✅ AlphaKids is installed on this device.</p>
         ) : canInstall ? (
           <>
             <p className="info-text">
-              Add Aphakids to the home screen. It opens full screen and works offline.
+              Add AlphaKids to the home screen. It opens full screen and works offline.
             </p>
             <button type="button" className="btn btn-primary" onClick={install} disabled={busy}>
-              {busy ? 'Installing…' : '📲 Install Aphakids'}
+              {busy ? 'Installing…' : '📲 Install AlphaKids'}
             </button>
           </>
         ) : ios ? (
@@ -166,7 +166,7 @@ function ParentZone({ onBack }: { onBack: () => void }) {
           </>
         ) : (
           <p className="info-text">
-            Open Aphakids in Chrome (Android) or Safari (iPhone), then choose “Install app” or
+            Open AlphaKids in Chrome (Android) or Safari (iPhone), then choose “Install app” or
             “Add to Home Screen”.
           </p>
         )}
@@ -214,10 +214,10 @@ function ParentZone({ onBack }: { onBack: () => void }) {
 
       <Modal open={iosHelp} title="Install on iPhone or iPad" onClose={() => setIosHelp(false)}>
         <ol className="ios-steps">
-          <li>Open Aphakids in Safari.</li>
+          <li>Open AlphaKids in Safari.</li>
           <li>Tap the Share button (the square with an arrow).</li>
           <li>Scroll down and tap “Add to Home Screen”.</li>
-          <li>Tap “Add”. The Aphakids icon will appear on your home screen.</li>
+          <li>Tap “Add”. The AlphaKids icon will appear on your home screen.</li>
         </ol>
         <button type="button" className="btn btn-primary" onClick={() => setIosHelp(false)}>
           Got it

@@ -1,9 +1,9 @@
 {
-  "name": "aphakids",
+  "name": "alphakids",
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "description": "Aphakids — a playful offline PWA for early reading, counting, and math.",
+  "description": "AlphaKids — a playful offline PWA for early reading, counting, and math.",
   "engines": {
     "node": "22.x"
   },

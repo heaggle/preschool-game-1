@@ -10,8 +10,8 @@ export default defineConfig({
       injectRegister: false,
       includeAssets: ['icon.svg', 'icons/apple-touch-icon.png'],
       manifest: {
-        name: 'Aphakids — Read, Count, Play',
-        short_name: 'Aphakids',
+        name: 'AlphaKids — Read, Count, Play',
+        short_name: 'AlphaKids',
         description:
           'A safe, playful app for ages 4–6: read easy words, count to 100, and practise addition and subtraction.',
         start_url: '.',

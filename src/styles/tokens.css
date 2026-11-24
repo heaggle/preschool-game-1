@@ -33,6 +33,9 @@
 
   --font: 'Fredoka Variable', 'Fredoka', 'Segoe UI', system-ui, -apple-system, sans-serif;
 
+  /* Height reserved for the discreet app signature at the bottom of every screen. */
+  --foot-h: 28px;
+
   --safe-top: env(safe-area-inset-top, 0px);
   --safe-right: env(safe-area-inset-right, 0px);
   --safe-bottom: env(safe-area-inset-bottom, 0px);

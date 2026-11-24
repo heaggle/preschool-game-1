@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { playSfx, primeAudio } from './lib/audio';
+import { APP_SIGNATURE } from './lib/constants';
 import { CountingScreen } from './screens/CountingScreen';
 import { HomeScreen } from './screens/HomeScreen';
 import { MathScreen } from './screens/MathScreen';
@@ -98,6 +99,8 @@ export default function App() {
 
         {route.screen === 'parent' ? <ParentScreen onBack={goBack} /> : null}
       </main>
+
+      <footer className="app-foot">{APP_SIGNATURE}</footer>
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { IconButton, StarBar } from '../components/ui';
-import { APP_AUTHOR, APP_SITE_LABEL, APP_YEAR, ROUND_LENGTH } from '../lib/constants';
+import { ROUND_LENGTH } from '../lib/constants';
 import { speak } from '../lib/audio';
 import { useInstallPrompt } from '../lib/pwa';
 import { useApp } from '../state/AppContext';
@@ -83,12 +83,9 @@ export function HomeScreen({
         ))}
       </div>
 
-      <div className="home-foot">
-        <p>Earn {ROUND_LENGTH} stars every round. Collect stickers!</p>
-        <p className="home-signature">
-          © {APP_YEAR} {APP_AUTHOR} · {APP_SITE_LABEL}
-        </p>
-      </div>
+      <p className="home-foot">
+        Earn {ROUND_LENGTH} stars every round. Collect stickers!
+      </p>
     </div>
   );
 }
