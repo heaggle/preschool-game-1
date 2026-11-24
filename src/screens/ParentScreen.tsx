@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { ParentGate } from '../components/ParentGate';
 import { Modal, ScreenHeader } from '../components/ui';
-import { APP_NAME, APP_VERSION, AVATARS } from '../lib/constants';
+import { APP_NAME, APP_VERSION, APP_AUTHOR, APP_SITE_LABEL, APP_SITE_URL, APP_YEAR, AVATARS } from '../lib/constants';
 import { speak } from '../lib/audio';
 import { useInstallPrompt } from '../lib/pwa';
 import { useEnglishVoices } from '../lib/useVoices';
@@ -203,6 +203,12 @@ function ParentZone({ onBack }: { onBack: () => void }) {
         <p className="info-text small">
           Works offline. No data leaves the device. Designed for big fingers and little
           readers.
+        </p>
+        <p className="about-signature">
+          © {APP_YEAR} {APP_AUTHOR} ·{' '}
+          <a className="text-link" href={APP_SITE_URL} target="_blank" rel="noopener noreferrer">
+            {APP_SITE_LABEL}
+          </a>
         </p>
       </section>
 
