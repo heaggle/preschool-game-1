@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { IconButton, StarBar } from '../components/ui';
 import { ROUND_LENGTH } from '../lib/constants';
 import { speak } from '../lib/audio';
-import { useInstallPrompt } from '../lib/pwa';
+import { useInstallPrompt, useAppUpdate } from '../lib/pwa';
 import { useApp } from '../state/AppContext';
 
 type HomeTarget = 'words' | 'counting' | 'math' | 'stickers';
@@ -29,6 +29,7 @@ export function HomeScreen({
 }) {
   const { save } = useApp();
   const { canInstall } = useInstallPrompt();
+  const { needRefresh } = useAppUpdate();
   const name = save.profile.name.trim() || 'Friend';
   const greeting = `Hi, ${name}! Tap a card to play.`;
 
@@ -59,12 +60,18 @@ export function HomeScreen({
             className="gear-btn"
           >
             ⚙️
-            {canInstall ? <span className="dot-badge" aria-hidden /> : null}
+            {canInstall || needRefresh ? <span className="dot-badge" aria-hidden /> : null}
           </IconButton>
         </div>
       </header>
 
       <StarBar />
+
+      {needRefresh ? (
+        <p className="update-note" role="status">
+          ✨ A new version is ready — ask a grown-up to install it.
+        </p>
+      ) : null}
 
       <div className="home-grid">
         {CARDS.map((card) => (

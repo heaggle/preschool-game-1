@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [
     react(),
     VitePWA({
-      registerType: 'autoUpdate',
+      registerType: 'prompt',
       injectRegister: false,
       includeAssets: ['icon.svg', 'icons/apple-touch-icon.png'],
       manifest: {
@@ -47,8 +47,11 @@ export default defineConfig({
         globPatterns: ['**/*.{js,css,html,svg,png,ico,woff,woff2,webmanifest}'],
         navigateFallback: 'index.html',
         cleanupOutdatedCaches: true,
+        // Wait for the user (through the Parent Zone) before swapping versions,
+        // so a running game is never reloaded mid-round. clientsClaim lets the
+        // activated worker take over once the user asks for the update.
+        skipWaiting: false,
         clientsClaim: true,
-        skipWaiting: true,
       },
       devOptions: {
         enabled: false,

@@ -153,10 +153,10 @@ try {
   await goHome();
 
   await page.evaluate(() => {
-    const raw = window.localStorage.getItem('aphakids.save.v1');
+    const raw = window.localStorage.getItem('alphakids.save.v1');
     const save = raw ? JSON.parse(raw) : { version: 1 };
     save.stars = 60;
-    window.localStorage.setItem('aphakids.save.v1', JSON.stringify(save));
+    window.localStorage.setItem('alphakids.save.v1', JSON.stringify(save));
   });
   await page.reload({ waitUntil: 'networkidle' });
   await openSection('Stickers');

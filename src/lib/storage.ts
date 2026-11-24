@@ -16,7 +16,7 @@ export type SaveData = {
   settings: Settings;
 };
 
-const STORAGE_KEY = 'aphakids.save.v1';
+const STORAGE_KEY = 'alphakids.save.v1';
 
 export const DEFAULT_SAVE: SaveData = {
   version: 1,

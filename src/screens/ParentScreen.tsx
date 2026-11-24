@@ -3,7 +3,7 @@ import { ParentGate } from '../components/ParentGate';
 import { Modal, ScreenHeader } from '../components/ui';
 import { APP_NAME, APP_VERSION, APP_AUTHOR, APP_SITE_LABEL, APP_SITE_URL, APP_YEAR, AVATARS } from '../lib/constants';
 import { speak } from '../lib/audio';
-import { useInstallPrompt } from '../lib/pwa';
+import { useAppUpdate, useInstallPrompt, type UpdateCheck } from '../lib/pwa';
 import { useEnglishVoices } from '../lib/useVoices';
 import { useApp } from '../state/AppContext';
 
@@ -21,6 +21,8 @@ function ParentZone({ onBack }: { onBack: () => void }) {
   const { save, setProfile, setSettings, resetProgress } = useApp();
   const voices = useEnglishVoices();
   const { canInstall, busy, promptInstall, isIOS: ios, standalone } = useInstallPrompt();
+  const { needRefresh, checking, applyUpdate, checkForUpdate } = useAppUpdate();
+  const [checkResult, setCheckResult] = useState<UpdateCheck | null>(null);
   const [iosHelp, setIosHelp] = useState(false);
   const [resetOpen, setResetOpen] = useState(false);
   const [installedNow, setInstalledNow] = useState(false);
@@ -39,6 +41,17 @@ function ParentZone({ onBack }: { onBack: () => void }) {
     const outcome = await promptInstall();
     if (outcome === 'accepted') setInstalledNow(true);
   };
+
+  const checkUpdates = async () => {
+    setCheckResult(await checkForUpdate());
+  };
+
+  const checkMessage =
+    checkResult === 'current'
+      ? 'You are up to date.'
+      : checkResult === 'unavailable'
+        ? 'Could not check. Connect to the internet and try again.'
+        : 'Updates download quietly in the background. Install them here when they are ready.';
 
   const updateName = (value: string) => {
     setProfile({ name: value.slice(0, 12) });
@@ -175,6 +188,36 @@ function ParentZone({ onBack }: { onBack: () => void }) {
             Installation requires the secure (HTTPS) version of the app.
           </p>
         ) : null}
+      </section>
+
+      <section className="section-card">
+        <h2 className="section-title">App updates</h2>
+        <div className="stat-row">
+          <span>Installed version</span>
+          <strong>
+            {APP_NAME} {APP_VERSION}
+          </strong>
+        </div>
+        {needRefresh ? (
+          <>
+            <p className="info-text success">✨ A new version is ready to install.</p>
+            <button type="button" className="btn btn-primary" onClick={applyUpdate}>
+              Install update
+            </button>
+          </>
+        ) : (
+          <>
+            <p className="info-text">{checkMessage}</p>
+            <button
+              type="button"
+              className="btn btn-secondary"
+              onClick={checkUpdates}
+              disabled={checking}
+            >
+              {checking ? 'Checking…' : 'Check for updates'}
+            </button>
+          </>
+        )}
       </section>
 
       <section className="section-card">

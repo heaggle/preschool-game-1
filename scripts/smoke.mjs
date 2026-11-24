@@ -1,4 +1,4 @@
-﻿import { createServer } from 'node:http';
+import { createServer } from 'node:http';
 import { mkdir, readFile } from 'node:fs/promises';
 import path from 'node:path';
 import { chromium } from 'playwright';
@@ -171,11 +171,11 @@ try {
 
   // Simulate a child with 60 stars, then open stickers.
   await page.evaluate(() => {
-    const raw = window.localStorage.getItem('aphakids.save.v1');
+    const raw = window.localStorage.getItem('alphakids.save.v1');
     const save = raw ? JSON.parse(raw) : { version: 1 };
     save.stars = 60;
-    save.profile = { name: 'Lina', avatar: '🦄' };
-    window.localStorage.setItem('aphakids.save.v1', JSON.stringify(save));
+    save.profile = { name: 'Lina', avatar: '??' };
+    window.localStorage.setItem('alphakids.save.v1', JSON.stringify(save));
   });
   await page.reload({ waitUntil: 'networkidle' });
   await page.evaluate(() => document.fonts.ready);
