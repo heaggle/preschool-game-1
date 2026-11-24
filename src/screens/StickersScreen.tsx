@@ -1,6 +1,6 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { IconButton, ScreenHeader } from '../components/ui';
-import { STICKERS, nextSticker, unlockedStickers } from '../content/stickers';
+import { STICKERS, nextSticker, unlockedStickers, type Sticker } from '../content/stickers';
 import { playSfx, speak } from '../lib/audio';
 import { useApp } from '../state/AppContext';
 
@@ -17,6 +17,28 @@ export function StickersScreen({ onBack }: { onBack: () => void }) {
     ? Math.min(1, Math.max(0, (save.stars - previousThreshold) / (next.threshold - previousThreshold)))
     : 1;
 
+  const [tapped, setTapped] = useState<{ id: string; locked: boolean } | null>(null);
+  const tapTimer = useRef<number | null>(null);
+
+  useEffect(
+    () => () => {
+      if (tapTimer.current) window.clearTimeout(tapTimer.current);
+    },
+    [],
+  );
+
+  const tapSticker = (sticker: Sticker, isUnlocked: boolean) => {
+    playSfx(isUnlocked ? 'pop' : 'click');
+    speak(
+      isUnlocked
+        ? `${sticker.name}!`
+        : `Locked. ${sticker.threshold} stars to unlock this sticker.`,
+    );
+    setTapped({ id: sticker.id, locked: !isUnlocked });
+    if (tapTimer.current) window.clearTimeout(tapTimer.current);
+    tapTimer.current = window.setTimeout(() => setTapped(null), 540);
+  };
+
   return (
     <div className="screen">
       <ScreenHeader
@@ -26,7 +48,7 @@ export function StickersScreen({ onBack }: { onBack: () => void }) {
         right={
           <IconButton
             label="Hear the instructions"
-            onClick={() => speak('This is your sticker collection. Play games to earn stars!')}
+            onClick={() => speak('This is your sticker collection. Tap a sticker to hear its name. Play games to earn more stars!')}
           >
             🔊
           </IconButton>
@@ -70,15 +92,19 @@ export function StickersScreen({ onBack }: { onBack: () => void }) {
       <div className="sticker-grid">
         {STICKERS.map((sticker) => {
           const isUnlocked = unlocked.has(sticker.id);
+          const reaction =
+            tapped?.id === sticker.id ? (tapped.locked ? 'nudge' : 'pop') : '';
           return (
-            <div
+            <button
               key={sticker.id}
-              className={`sticker-card ${isUnlocked ? 'unlocked' : 'locked'}`}
+              type="button"
+              className={`sticker-card ${isUnlocked ? 'unlocked' : 'locked'}${reaction ? ` ${reaction}` : ''}`}
               aria-label={
                 isUnlocked
-                  ? `${sticker.name} sticker`
+                  ? `${sticker.name} sticker, tap to hear its name`
                   : `Locked sticker, ${sticker.threshold} stars`
               }
+              onClick={() => tapSticker(sticker, isUnlocked)}
             >
               <span className="sticker-emoji" aria-hidden>
                 {isUnlocked ? sticker.emoji : '🔒'}
@@ -86,7 +112,7 @@ export function StickersScreen({ onBack }: { onBack: () => void }) {
               <span className="sticker-name">
                 {isUnlocked ? sticker.name : `${sticker.threshold} ⭐`}
               </span>
-            </div>
+            </button>
           );
         })}
       </div>
