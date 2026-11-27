@@ -157,7 +157,7 @@ try {
   for (let round = 0; round < 5; round += 1) {
     const items = await page.locator('.seq-item').allInnerTexts();
     const blank = items.indexOf('?');
-    const answer = Number(items[blank - 1]) + 1;
+    const answer = blank === 0 ? Number(items[1]) - 1 : Number(items[blank - 1]) + 1;
     await clickChoice(page, answer);
     await page.waitForTimeout(1900);
   }
@@ -172,7 +172,7 @@ try {
   for (let round = 0; round < 5; round += 1) {
     const items = await page.locator('.tens-item').allInnerTexts();
     const blank = items.indexOf('?');
-    const answer = Number(items[blank - 1]) + 10;
+    const answer = blank === 0 ? Number(items[1]) - 10 : Number(items[blank - 1]) + 10;
     await clickChoice(page, answer);
     await page.waitForTimeout(1900);
   }

@@ -15,7 +15,7 @@ type GameProps = {
 };
 
 export function MathGame({ kind, max, onAgain, onHome }: GameProps) {
-  const round = useGameRound(5);
+  const round = useGameRound(5, 'math');
 
   return (
     <GameBox done={round.done} onAgain={onAgain} onHome={onHome}>

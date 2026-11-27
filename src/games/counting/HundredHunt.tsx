@@ -10,7 +10,7 @@ import { useGameRound } from '../../lib/useGameRound';
 type GameProps = { onAgain: () => void; onHome: () => void };
 
 export function HundredHunt({ onAgain, onHome }: GameProps) {
-  const round = useGameRound(5);
+  const round = useGameRound(5, 'counting');
 
   return (
     <GameBox done={round.done} onAgain={onAgain} onHome={onHome}>

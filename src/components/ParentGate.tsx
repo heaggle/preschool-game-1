@@ -62,6 +62,19 @@ export function ParentGate({ onSuccess, onBack }: { onSuccess: () => void; onBac
           onPointerUp={stop}
           onPointerLeave={stop}
           onPointerCancel={stop}
+          onKeyDown={(event) => {
+            if (event.key === ' ' || event.key === 'Enter') {
+              event.preventDefault();
+              start();
+            }
+          }}
+          onKeyUp={(event) => {
+            if (event.key === ' ' || event.key === 'Enter') {
+              event.preventDefault();
+              stop();
+            }
+          }}
+          onBlur={stop}
           onContextMenu={(event) => event.preventDefault()}
         >
           <span className="hold-fill" style={{ transform: `scaleX(${progress})` }} />

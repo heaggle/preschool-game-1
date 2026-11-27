@@ -124,6 +124,11 @@ export function primeAudio(): void {
   }
 }
 
+/** True once audio has been unlocked by a user gesture on this device. */
+export function isAudioPrimed(): boolean {
+  return primed;
+}
+
 function tone(
   context: AudioContext,
   frequency: number,

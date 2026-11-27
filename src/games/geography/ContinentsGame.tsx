@@ -1,0 +1,26 @@
+import { CONTINENTS } from '../../content/geography';
+import { pick, sample, shuffle } from '../../lib/random';
+import { PickGame, type GameProps, type PickRound } from '../shared/PickGame';
+
+function makeRound(): PickRound {
+  const target = pick(CONTINENTS);
+  const distractors = sample(
+    CONTINENTS.filter((continent) => continent.id !== target.id),
+    2,
+  );
+  const options = shuffle([
+    { key: target.id, emoji: target.emoji, label: target.name },
+    ...distractors.map((d) => ({ key: d.id, emoji: d.emoji, label: d.name })),
+  ]);
+  return {
+    prompt: 'Where is it?',
+    speakText: `Where is ${target.name}?`,
+    options,
+    answer: target.id,
+    answerText: target.name,
+  };
+}
+
+export function ContinentsGame({ onAgain, onHome }: GameProps) {
+  return <PickGame makeRound={makeRound} onAgain={onAgain} onHome={onHome} domain="geography" />;
+}

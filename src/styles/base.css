@@ -14,7 +14,8 @@ body {
   min-height: 100%;
   font-family: var(--font);
   color: var(--ink);
-  background: var(--cream);
+  background: linear-gradient(180deg, #fffaf0 0%, var(--cream) 42%, #fdeedd 100%);
+  background-attachment: fixed;
   overscroll-behavior-y: none;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -75,7 +76,7 @@ textarea {
 }
 
 :focus-visible {
-  outline: 4px solid var(--sun-d);
+  outline: 4px solid var(--grape-d);
   outline-offset: 3px;
 }
 

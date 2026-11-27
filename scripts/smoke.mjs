@@ -174,7 +174,7 @@ try {
     const raw = window.localStorage.getItem('alphakids.save.v1');
     const save = raw ? JSON.parse(raw) : { version: 1 };
     save.stars = 60;
-    save.profile = { name: 'Lina', avatar: '??' };
+    save.profile = { name: 'Lina', avatar: '🦊' };
     window.localStorage.setItem('alphakids.save.v1', JSON.stringify(save));
   });
   await page.reload({ waitUntil: 'networkidle' });

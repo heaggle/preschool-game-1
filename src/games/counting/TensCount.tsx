@@ -11,7 +11,7 @@ type GameProps = { onAgain: () => void; onHome: () => void };
 const TENS = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
 
 export function TensCount({ onAgain, onHome }: GameProps) {
-  const round = useGameRound(5);
+  const round = useGameRound(5, 'counting');
 
   return (
     <GameBox done={round.done} onAgain={onAgain} onHome={onHome}>
@@ -22,7 +22,7 @@ export function TensCount({ onAgain, onHome }: GameProps) {
 
 function TensQuestion({ onCorrect }: { onCorrect: () => void }) {
   const setup = useMemo(() => {
-    const blank = randInt(1, 8);
+    const blank = randInt(0, 9);
     const answer = TENS[blank];
     const choices = shuffle([
       answer,

@@ -13,7 +13,7 @@ type GameProps = {
 };
 
 export function BuildWord({ syllables, onAgain, onHome }: GameProps) {
-  const round = useGameRound(5);
+  const round = useGameRound(5, 'words');
 
   return (
     <GameBox done={round.done} onAgain={onAgain} onHome={onHome}>

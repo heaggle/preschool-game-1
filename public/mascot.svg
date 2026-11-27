@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="420" viewBox="0 0 400 420">
+  <defs>
+    <linearGradient id="fur" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#F3EDFB"/>
+      <stop offset="1" stop-color="#DDD3EE"/>
+    </linearGradient>
+  </defs>
+
+  <!-- ringed tail -->
+  <path d="M296 300 C 358 292 374 218 334 150 C 316 120 290 122 300 150"
+        fill="none" stroke="#C9BDE8" stroke-width="32" stroke-linecap="round"/>
+  <path d="M296 300 C 358 292 374 218 334 150 C 316 120 290 122 300 150"
+        fill="none" stroke="#2E2A4A" stroke-width="32" stroke-linecap="round"
+        stroke-dasharray="18 20"/>
+
+  <!-- body -->
+  <ellipse cx="196" cy="300" rx="92" ry="96" fill="url(#fur)"/>
+  <!-- belly -->
+  <ellipse cx="196" cy="314" rx="56" ry="62" fill="#FFF8ED"/>
+
+  <!-- feet -->
+  <ellipse cx="164" cy="392" rx="30" ry="20" fill="#C9BDE8"/>
+  <ellipse cx="228" cy="392" rx="30" ry="20" fill="#C9BDE8"/>
+
+  <!-- left arm (resting) -->
+  <path d="M128 268 C 110 290 106 316 112 336" stroke="#E2D9F0" stroke-width="32" stroke-linecap="round" fill="none"/>
+
+  <!-- right arm (waving) -->
+  <path d="M262 258 C 288 246 300 224 302 200" stroke="#E2D9F0" stroke-width="32" stroke-linecap="round" fill="none"/>
+  <circle cx="303" cy="192" r="17" fill="#E2D9F0"/>
+
+  <!-- head -->
+  <ellipse cx="200" cy="172" rx="96" ry="90" fill="url(#fur)"/>
+
+  <!-- ears -->
+  <path d="M120 142 C 112 104 120 70 158 68 C 178 76 180 110 170 142 Z" fill="#C9BDE8"/>
+  <path d="M280 142 C 288 104 280 70 242 68 C 222 76 220 110 230 142 Z" fill="#C9BDE8"/>
+  <path d="M134 128 C 128 104 134 86 156 84 C 168 90 168 112 162 128 Z" fill="#FFB3C1"/>
+  <path d="M266 128 C 272 104 266 86 244 84 C 232 90 232 112 238 128 Z" fill="#FFB3C1"/>
+
+  <!-- face -->
+  <ellipse cx="200" cy="194" rx="70" ry="60" fill="#FFF8ED"/>
+
+  <!-- eyes -->
+  <circle cx="172" cy="160" r="16" fill="#2E2A4A"/>
+  <circle cx="228" cy="160" r="16" fill="#2E2A4A"/>
+  <circle cx="177" cy="155" r="5.5" fill="#FFFFFF"/>
+  <circle cx="233" cy="155" r="5.5" fill="#FFFFFF"/>
+
+  <!-- nose -->
+  <path d="M200 190 Q192 190 193 199 Q200 207 207 199 Q208 190 200 190 Z" fill="#2E2A4A"/>
+
+  <!-- mouth -->
+  <path d="M200 207 Q191 215 181 209" stroke="#2E2A4A" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <path d="M200 207 Q209 215 219 209" stroke="#2E2A4A" stroke-width="5" fill="none" stroke-linecap="round"/>
+
+  <!-- blush -->
+  <circle cx="138" cy="196" r="12" fill="#FFB3C1" opacity="0.55"/>
+  <circle cx="262" cy="196" r="12" fill="#FFB3C1" opacity="0.55"/>
+</svg>

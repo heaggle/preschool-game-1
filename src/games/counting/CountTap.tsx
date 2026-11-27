@@ -18,7 +18,7 @@ const OBJECTS = [
 ];
 
 export function CountTap({ onAgain, onHome }: GameProps) {
-  const round = useGameRound(5);
+  const round = useGameRound(5, 'counting');
 
   return (
     <GameBox done={round.done} onAgain={onAgain} onHome={onHome}>

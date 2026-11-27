@@ -2,12 +2,20 @@ import { useState } from 'react';
 import { BuildWord } from '../games/words/BuildWord';
 import { HearAndFind } from '../games/words/HearAndFind';
 import { ReadTogether } from '../games/words/ReadTogether';
+import { FindWordGame } from '../games/phonics/FindWordGame';
+import { FirstSoundGame } from '../games/phonics/FirstSoundGame';
+import { LetterBlend } from '../games/phonics/LetterBlend';
+import { RhymeGame } from '../games/phonics/RhymeGame';
 import { MenuCard } from '../components/MenuCard';
 import { IconButton, ScreenHeader } from '../components/ui';
 import { speak } from '../lib/audio';
 
 const TITLES: Record<string, string> = {
   find: 'Hear & Find',
+  initial: 'First Sound',
+  rhyme: 'Rhyme Time',
+  blend: 'Build by Letter',
+  findword: 'Find the Word',
   read: 'Read Together',
   build2: 'Build a Word',
   build3: 'Big Words',
@@ -27,7 +35,14 @@ export function WordsScreen({
   const [run, setRun] = useState(0);
   const again = () => setRun((value) => value + 1);
   const valid =
-    activity === 'find' || activity === 'read' || activity === 'build2' || activity === 'build3';
+    activity === 'find' ||
+    activity === 'initial' ||
+    activity === 'rhyme' ||
+    activity === 'blend' ||
+    activity === 'findword' ||
+    activity === 'read' ||
+    activity === 'build2' ||
+    activity === 'build3';
 
   if (!valid) {
     return (
@@ -45,7 +60,7 @@ export function WordsScreen({
             </IconButton>
           }
         />
-        <p className="screen-sub">Listen, read, and build words.</p>
+        <p className="screen-sub">Listen to sounds, then read and build words.</p>
 
         <div className="menu-grid">
           <MenuCard
@@ -56,10 +71,38 @@ export function WordsScreen({
             onClick={() => onSelect('find')}
           />
           <MenuCard
-            emoji="📖"
+            emoji="🎵"
+            title="First Sound"
+            subtitle="Same start sound"
+            accent="coral"
+            onClick={() => onSelect('initial')}
+          />
+          <MenuCard
+            emoji="🎶"
+            title="Rhyme Time"
+            subtitle="Words that rhyme"
+            accent="grape"
+            onClick={() => onSelect('rhyme')}
+          />
+          <MenuCard
+            emoji="🔤"
+            title="Build by Letter"
+            subtitle="Spell 3-letter words"
+            accent="mint"
+            onClick={() => onSelect('blend')}
+          />
+          <MenuCard
+            emoji="🔍"
+            title="Find the Word"
+            subtitle="Read a word"
+            accent="sun"
+            onClick={() => onSelect('findword')}
+          />
+          <MenuCard
+            emoji="📚"
             title="Read Together"
             subtitle="Tap the parts"
-            accent="grape"
+            accent="sky"
             onClick={() => onSelect('read')}
           />
           <MenuCard
@@ -73,7 +116,7 @@ export function WordsScreen({
             emoji="🧱"
             title="Big Words"
             subtitle="3 syllables"
-            accent="sun"
+            accent="grape"
             onClick={() => onSelect('build3')}
           />
         </div>
@@ -85,6 +128,14 @@ export function WordsScreen({
     switch (activity) {
       case 'find':
         return <HearAndFind onAgain={again} onHome={onHome} />;
+      case 'initial':
+        return <FirstSoundGame onAgain={again} onHome={onHome} />;
+      case 'rhyme':
+        return <RhymeGame onAgain={again} onHome={onHome} />;
+      case 'blend':
+        return <LetterBlend onAgain={again} onHome={onHome} />;
+      case 'findword':
+        return <FindWordGame onAgain={again} onHome={onHome} />;
       case 'read':
         return <ReadTogether onAgain={again} onHome={onHome} />;
       case 'build2':

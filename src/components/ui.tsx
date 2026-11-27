@@ -190,9 +190,12 @@ export function RewardOverlay({
       <Confetti />
       <div className="overlay reward-overlay">
         <div className="reward-card" role="dialog" aria-modal="true" aria-label="Round complete">
-          <div className="reward-emoji" aria-hidden>
-            🏆
-          </div>
+          <img
+            className="reward-mascot"
+            src={`${import.meta.env.BASE_URL}mascot.svg`}
+            alt=""
+            aria-hidden
+          />
           <h2 className="reward-title">Amazing!</h2>
           <p className="reward-stars">+{starsEarned} ⭐</p>
           <div className="reward-actions">

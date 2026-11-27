@@ -5,26 +5,48 @@
       <stop offset="0.55" stop-color="#6FA8F8"/>
       <stop offset="1" stop-color="#9B7EDE"/>
     </linearGradient>
-    <linearGradient id="letter" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#FFFFFF"/>
-      <stop offset="1" stop-color="#EAF6FF"/>
+    <linearGradient id="fur" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#F3EDFB"/>
+      <stop offset="1" stop-color="#DDD3EE"/>
     </linearGradient>
   </defs>
+
   <rect width="512" height="512" rx="116" fill="url(#bg)"/>
-  <circle cx="92" cy="424" r="50" fill="#FFFFFF" opacity="0.16"/>
+  <circle cx="88" cy="424" r="50" fill="#FFFFFF" opacity="0.16"/>
   <circle cx="438" cy="388" r="76" fill="#FFFFFF" opacity="0.12"/>
   <circle cx="72" cy="74" r="10" fill="#FFFFFF" opacity="0.45"/>
-  <circle cx="460" cy="238" r="7" fill="#FFFFFF" opacity="0.5"/>
+  <circle cx="462" cy="230" r="7" fill="#FFFFFF" opacity="0.5"/>
+
+  <!-- ears -->
+  <path d="M158 198 C 148 150 140 110 178 98 C 202 108 208 152 202 194 Z" fill="#C9BDE8"/>
+  <path d="M354 198 C 364 150 372 110 334 98 C 310 108 304 152 310 194 Z" fill="#C9BDE8"/>
+  <path d="M168 184 C 161 150 154 126 178 118 C 195 126 198 156 193 181 Z" fill="#FFB3C1"/>
+  <path d="M344 184 C 351 150 358 126 334 118 C 317 126 314 156 319 181 Z" fill="#FFB3C1"/>
+
+  <!-- head -->
+  <ellipse cx="256" cy="286" rx="150" ry="142" fill="url(#fur)"/>
+  <!-- face mask -->
+  <ellipse cx="256" cy="300" rx="106" ry="92" fill="#FFF8ED"/>
+
+  <!-- eyes -->
+  <circle cx="206" cy="252" r="25" fill="#2E2A4A"/>
+  <circle cx="306" cy="252" r="25" fill="#2E2A4A"/>
+  <circle cx="214" cy="243" r="8.5" fill="#FFFFFF"/>
+  <circle cx="314" cy="243" r="8.5" fill="#FFFFFF"/>
+
+  <!-- nose -->
+  <path d="M256 296 Q246 296 248 308 Q256 318 264 308 Q266 296 256 296 Z" fill="#2E2A4A"/>
+
+  <!-- mouth -->
+  <path d="M256 318 Q244 328 232 320" stroke="#2E2A4A" stroke-width="7" fill="none" stroke-linecap="round"/>
+  <path d="M256 318 Q268 328 280 320" stroke="#2E2A4A" stroke-width="7" fill="none" stroke-linecap="round"/>
+
+  <!-- blush -->
+  <circle cx="162" cy="306" r="18" fill="#FFB3C1" opacity="0.55"/>
+  <circle cx="350" cy="306" r="18" fill="#FFB3C1" opacity="0.55"/>
+
+  <!-- star accent -->
   <path
-    d="M256 96 L392 416 L316 416 L292 356 L220 356 L196 416 L120 416 Z M256 196 L236 262 L276 262 Z"
-    fill="url(#letter)"
-    fill-rule="evenodd"
-  />
-  <path
-    d="M402 60 L413.2 90.6 L445.8 91.8 L420.1 111.9 L429 143.2 L402 125 L375 143.2 L383.9 111.9 L358.2 91.8 L390.8 90.6 Z"
-    fill="#FFD93D"
-    stroke="#FFF8ED"
-    stroke-width="8"
-    stroke-linejoin="round"
-  />
+    d="M402 64 L413.2 94.6 L445.8 95.8 L420.1 115.9 L429 147.2 L402 129 L375 147.2 L383.9 115.9 L358.2 95.8 L390.8 94.6 Z"
+    fill="#FFD93D" stroke="#FFF8ED" stroke-width="8" stroke-linejoin="round"/>
 </svg>

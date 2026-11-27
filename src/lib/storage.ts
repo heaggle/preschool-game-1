@@ -9,11 +9,34 @@ export type Profile = {
   avatar: string;
 };
 
+export type TalentAxis = 'math' | 'letters' | 'logic';
+
+export type TalentStats = {
+  right: number;
+  total: number;
+};
+
+export type Talents = Record<TalentAxis, TalentStats>;
+
+export type Domain =
+  | 'words'
+  | 'counting'
+  | 'math'
+  | 'logic'
+  | 'geography'
+  | 'madagascar'
+  | 'robot';
+
+/** Number of correct answers per domain — drives the level progression. */
+export type Progress = Record<Domain, number>;
+
 export type SaveData = {
   version: 1;
   stars: number;
   profile: Profile;
   settings: Settings;
+  talents: Talents;
+  progress: Progress;
 };
 
 const STORAGE_KEY = 'alphakids.save.v1';
@@ -23,6 +46,20 @@ export const DEFAULT_SAVE: SaveData = {
   stars: 0,
   profile: { name: 'Friend', avatar: '🦊' },
   settings: { soundOn: true, volume: 0.9, voiceURI: null },
+  talents: {
+    math: { right: 0, total: 0 },
+    letters: { right: 0, total: 0 },
+    logic: { right: 0, total: 0 },
+  },
+  progress: {
+    words: 0,
+    counting: 0,
+    math: 0,
+    logic: 0,
+    geography: 0,
+    madagascar: 0,
+    robot: 0,
+  },
 };
 
 function clampVolume(value: unknown): number {
@@ -35,6 +72,57 @@ function cleanName(value: unknown): string {
   if (typeof value !== 'string') return DEFAULT_SAVE.profile.name;
   const name = value.slice(0, 12).trim();
   return name.length > 0 ? name : DEFAULT_SAVE.profile.name;
+}
+
+function sanitizeProgress(raw: unknown): Progress {
+  const data = (raw ?? {}) as Partial<Record<Domain, unknown>>;
+  const domains: Domain[] = [
+    'words',
+    'counting',
+    'math',
+    'logic',
+    'geography',
+    'madagascar',
+    'robot',
+  ];
+  const progress = {
+    words: 0,
+    counting: 0,
+    math: 0,
+    logic: 0,
+    geography: 0,
+    madagascar: 0,
+    robot: 0,
+  } as Progress;
+  for (const domain of domains) {
+    const value = data[domain];
+    progress[domain] =
+      typeof value === 'number' && Number.isFinite(value) ? Math.max(0, Math.floor(value)) : 0;
+  }
+  return progress;
+}
+
+function sanitizeTalents(raw: unknown): Talents {
+  const data = (raw ?? {}) as Partial<Record<TalentAxis, Partial<TalentStats>>>;
+  const axes: TalentAxis[] = ['math', 'letters', 'logic'];
+  const talents: Talents = {
+    math: { right: 0, total: 0 },
+    letters: { right: 0, total: 0 },
+    logic: { right: 0, total: 0 },
+  };
+  for (const axis of axes) {
+    const stats = data[axis] ?? {};
+    const right =
+      typeof stats.right === 'number' && Number.isFinite(stats.right)
+        ? Math.max(0, Math.floor(stats.right))
+        : 0;
+    const total =
+      typeof stats.total === 'number' && Number.isFinite(stats.total)
+        ? Math.max(0, Math.floor(stats.total))
+        : 0;
+    talents[axis] = { right: Math.min(right, total), total };
+  }
+  return talents;
 }
 
 function sanitize(raw: unknown): SaveData {
@@ -60,6 +148,8 @@ function sanitize(raw: unknown): SaveData {
       volume: clampVolume(settings.volume),
       voiceURI: typeof settings.voiceURI === 'string' && settings.voiceURI ? settings.voiceURI : null,
     },
+    talents: sanitizeTalents(data.talents),
+    progress: sanitizeProgress(data.progress),
   };
 }
 

@@ -1,22 +1,36 @@
 import { useEffect } from 'react';
 import { IconButton, StarBar } from '../components/ui';
 import { ROUND_LENGTH } from '../lib/constants';
-import { speak } from '../lib/audio';
+import { isAudioPrimed, speak } from '../lib/audio';
 import { useInstallPrompt, useAppUpdate } from '../lib/pwa';
 import { useApp } from '../state/AppContext';
 
-type HomeTarget = 'words' | 'counting' | 'math' | 'stickers';
+type HomeTarget =
+  | 'words'
+  | 'counting'
+  | 'math'
+  | 'logic'
+  | 'geography'
+  | 'madagascar'
+  | 'talents'
+  | 'robot'
+  | 'stickers';
 
 const CARDS: Array<{
   id: HomeTarget;
   emoji: string;
   title: string;
   subtitle: string;
-  color: 'grape' | 'sky' | 'coral' | 'sun';
+  color: 'grape' | 'sky' | 'coral' | 'sun' | 'mint' | 'teal' | 'rose' | 'lime' | 'indigo';
 }> = [
   { id: 'words', emoji: '📖', title: 'Words', subtitle: 'Read & build', color: 'grape' },
   { id: 'counting', emoji: '🔢', title: 'Counting', subtitle: '1 to 100', color: 'sky' },
   { id: 'math', emoji: '➕', title: 'Math', subtitle: 'Add & take away', color: 'coral' },
+  { id: 'logic', emoji: '🧠', title: 'Logic', subtitle: 'Think & match', color: 'rose' },
+  { id: 'geography', emoji: '🌍', title: 'Geography', subtitle: 'Countries & flags', color: 'mint' },
+  { id: 'madagascar', emoji: '🇲🇬', title: 'Madagascar', subtitle: 'My island', color: 'teal' },
+  { id: 'talents', emoji: '🧩', title: 'Explorations', subtitle: 'Fun challenges', color: 'lime' },
+  { id: 'robot', emoji: '🤖', title: 'Robot', subtitle: 'Guide the path', color: 'indigo' },
   { id: 'stickers', emoji: '⭐', title: 'Stickers', subtitle: 'My rewards', color: 'sun' },
 ];
 
@@ -34,7 +48,19 @@ export function HomeScreen({
   const greeting = `Hi, ${name}! Tap a card to play.`;
 
   useEffect(() => {
-    speak(greeting);
+    // Speech can be blocked until the first user gesture (iOS/Chrome autoplay
+    // policy). Greet immediately when audio is already unlocked; otherwise
+    // wait for the first tap so the child still hears the welcome.
+    if (isAudioPrimed()) {
+      speak(greeting);
+      return undefined;
+    }
+    const greetOnce = () => {
+      speak(greeting);
+      window.removeEventListener('pointerdown', greetOnce);
+    };
+    window.addEventListener('pointerdown', greetOnce);
+    return () => window.removeEventListener('pointerdown', greetOnce);
   }, [greeting]);
 
   return (
@@ -91,7 +117,13 @@ export function HomeScreen({
       </div>
 
       <p className="home-foot">
-        Earn {ROUND_LENGTH} stars every round. Collect stickers!
+        <img
+          className="home-foot-mascot"
+          src={`${import.meta.env.BASE_URL}mascot.svg`}
+          alt=""
+          aria-hidden
+        />
+        <span>Earn {ROUND_LENGTH} stars every round. Collect stickers!</span>
       </p>
     </div>
   );

@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { ParentGate } from '../components/ParentGate';
+import { ProgressPanel } from '../components/ProgressPanel';
+import { TalentProfile } from '../components/TalentProfile';
 import { Modal, ScreenHeader } from '../components/ui';
 import { APP_NAME, APP_VERSION, APP_AUTHOR, APP_SITE_LABEL, APP_SITE_URL, APP_YEAR, AVATARS } from '../lib/constants';
 import { speak } from '../lib/audio';
@@ -18,7 +20,7 @@ export function ParentScreen({ onBack }: { onBack: () => void }) {
 }
 
 function ParentZone({ onBack }: { onBack: () => void }) {
-  const { save, setProfile, setSettings, resetProgress } = useApp();
+  const { save, setProfile, setSettings, resetProgress, resetTalents } = useApp();
   const voices = useEnglishVoices();
   const { canInstall, busy, promptInstall, isIOS: ios, standalone } = useInstallPrompt();
   const { needRefresh, checking, applyUpdate, checkForUpdate } = useAppUpdate();
@@ -156,6 +158,18 @@ function ParentZone({ onBack }: { onBack: () => void }) {
       </section>
 
       <section className="section-card">
+        <h2 className="section-title">Talents (discreet)</h2>
+        <p className="info-text">
+          While your child plays, the app quietly notes how easily they answer numbers, letters
+          and logic. No test, no score for the child — only these gentle clues for you.
+        </p>
+        <TalentProfile talents={save.talents} />
+        <button type="button" className="btn btn-secondary" onClick={resetTalents}>
+          Reset the profile
+        </button>
+      </section>
+
+      <section className="section-card">
         <h2 className="section-title">Install app</h2>
         {standalone || installedNow ? (
           <p className="info-text success">✅ AlphaKids is installed on this device.</p>
@@ -226,6 +240,7 @@ function ParentZone({ onBack }: { onBack: () => void }) {
           <span>Stars collected</span>
           <strong>⭐ {save.stars}</strong>
         </div>
+        <ProgressPanel progress={save.progress} />
         <p className="info-text">
           Progress is stored only on this device. No account, no ads, no tracking.
         </p>

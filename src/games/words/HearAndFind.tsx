@@ -10,7 +10,7 @@ import { useGameRound } from '../../lib/useGameRound';
 type GameProps = { onAgain: () => void; onHome: () => void };
 
 export function HearAndFind({ onAgain, onHome }: GameProps) {
-  const round = useGameRound(5);
+  const round = useGameRound(5, 'words');
 
   return (
     <GameBox done={round.done} onAgain={onAgain} onHome={onHome}>

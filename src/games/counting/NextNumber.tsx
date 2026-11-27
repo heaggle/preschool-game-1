@@ -9,7 +9,7 @@ import { useGameRound } from '../../lib/useGameRound';
 type GameProps = { onAgain: () => void; onHome: () => void };
 
 export function NextNumber({ onAgain, onHome }: GameProps) {
-  const round = useGameRound(5);
+  const round = useGameRound(5, 'counting');
 
   return (
     <GameBox done={round.done} onAgain={onAgain} onHome={onHome}>
@@ -22,7 +22,7 @@ function NextQuestion({ onCorrect }: { onCorrect: () => void }) {
   const setup = useMemo(() => {
     const start = randInt(1, 17);
     const sequence = [start, start + 1, start + 2, start + 3];
-    const blank = randInt(1, 3);
+    const blank = randInt(0, 3);
     return {
       sequence,
       blank,

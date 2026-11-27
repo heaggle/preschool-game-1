@@ -5,10 +5,26 @@ import { CountingScreen } from './screens/CountingScreen';
 import { HomeScreen } from './screens/HomeScreen';
 import { MathScreen } from './screens/MathScreen';
 import { ParentScreen } from './screens/ParentScreen';
+import { GeographyScreen } from './screens/GeographyScreen';
+import { LogicScreen } from './screens/LogicScreen';
+import { MadagascarScreen } from './screens/MadagascarScreen';
+import { RobotScreen } from './screens/RobotScreen';
 import { StickersScreen } from './screens/StickersScreen';
+import { TalentsScreen } from './screens/TalentsScreen';
 import { WordsScreen } from './screens/WordsScreen';
 
-export type ScreenName = 'home' | 'words' | 'counting' | 'math' | 'stickers' | 'parent';
+export type ScreenName =
+  | 'home'
+  | 'words'
+  | 'counting'
+  | 'math'
+  | 'logic'
+  | 'geography'
+  | 'madagascar'
+  | 'talents'
+  | 'robot'
+  | 'stickers'
+  | 'parent';
 export type Route = { screen: ScreenName; activity?: string };
 
 const HOME: Route = { screen: 'home' };
@@ -94,6 +110,44 @@ export default function App() {
             onHome={goHome}
           />
         ) : null}
+
+        {route.screen === 'logic' ? (
+          <LogicScreen
+            activity={route.activity}
+            onSelect={(activity) => navigate({ screen: 'logic', activity })}
+            onBack={goBack}
+            onHome={goHome}
+          />
+        ) : null}
+
+        {route.screen === 'geography' ? (
+          <GeographyScreen
+            activity={route.activity}
+            onSelect={(activity) => navigate({ screen: 'geography', activity })}
+            onBack={goBack}
+            onHome={goHome}
+          />
+        ) : null}
+
+        {route.screen === 'madagascar' ? (
+          <MadagascarScreen
+            activity={route.activity}
+            onSelect={(activity) => navigate({ screen: 'madagascar', activity })}
+            onBack={goBack}
+            onHome={goHome}
+          />
+        ) : null}
+
+        {route.screen === 'talents' ? (
+          <TalentsScreen
+            activity={route.activity}
+            onSelect={(activity) => navigate({ screen: 'talents', activity })}
+            onBack={goBack}
+            onHome={goHome}
+          />
+        ) : null}
+
+        {route.screen === 'robot' ? <RobotScreen onBack={goBack} onHome={goHome} /> : null}
 
         {route.screen === 'stickers' ? <StickersScreen onBack={goBack} /> : null}
 
